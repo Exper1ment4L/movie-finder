@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { inject, observer } from 'mobx-react';
 
 const FavoriteButton = (props) => {
     const [isFav, setIsFav] = useState();
@@ -35,15 +36,16 @@ const FavoriteButton = (props) => {
                 }
             });
             localStorage.setItem('favorites', JSON.stringify(favArr));
+            props.store.setFavorites(favArr);
             setIsFav(false);
         }
     };
 
     return (
         <i className="fav-icon" onClick={handleClick}>
-            {isFav ? <FontAwesomeIcon icon={faHeartBroken} color="salmon" size="2x" /> : <FontAwesomeIcon icon={faHeart} color="red" size="2x" />}
+            {!isFav ? <FontAwesomeIcon icon={faHeart} size="2x" /> : <FontAwesomeIcon icon={faHeart} color="red" size="2x" />}
         </i>
     );
 };
 
-export default FavoriteButton;
+export default inject('store')(observer(FavoriteButton));
