@@ -1,0 +1,107 @@
+@import '~bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400&display=swap');
+
+$bg-white: white;
+$text-dark: #495057;
+$btn-fav-color: red;
+$text-font: 'Poppins', sans-serif;
+$navbar-color: #343a40;
+
+.html {
+    text-align: center;
+    align-items: center;
+}
+
+.movie-card {
+    position: relative;
+    width: 300px;
+    height: 550px;
+    margin-bottom: 20px;
+    margin-right: 25px;
+    text-align: center;
+    box-shadow: 5px 5px 20px #dadada;
+    border-radius: 5px;
+}
+
+.movie-card:hover {
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+}
+
+.movie-poster {
+    width: 300px;
+    height: 400px;
+    margin-bottom: 10px;
+}
+
+.movie-title {
+    font-family: $text-font;
+    font-weight: bold;
+}
+
+.movie-rating {
+    font-family: $text-font;
+    position: absolute;
+    bottom: 50px;
+    left: 110px;
+}
+
+.fav-icon {
+    border: none;
+    position: absolute;
+    bottom: 10px;
+    left: 134px;
+}
+
+.search-input {
+    padding: 0.375rem;
+    height: 40px;
+    color: $text-dark;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    border: none;
+    border-bottom: 1px solid;
+    background-color: $bg-white;
+    background-size: 16px;
+    background-image: url('https://image.flaticon.com/icons/svg/116/116836.svg');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    min-width: 100%;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.year-input {
+    height: 40px;
+    color: $text-dark;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    border: none;
+    border-bottom: 1px solid;
+    background-color: $bg-white;
+    min-width: 100%;
+}
+
+.year-input:focus {
+    outline: none;
+}
+
+.type-select {
+    height: 40px;
+    color: $text-dark;
+    border: none;
+    border-bottom: 1px solid;
+    background-color: $bg-white;
+    min-width: 100%;
+}
+
+.type-select:focus {
+    outline: none;
+}
+
+.navbar {
+    background-color: $navbar-color;
+}
