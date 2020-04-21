@@ -1,9 +1,17 @@
+import { Default } from 'react-awesome-spinners';
+
 const Poster = (props) => {
     const handleNoPoster = (e) => {
-        e.target.src = 'https://unibooks.nz/media/zoo/images/placeholder-135-300x500_e5ffd609dfdf17e01ff18b5428d59fa6.png';
+        e.target.onerror = null;
     };
 
-    return <img src={props.src} className="movie-poster" alt="moviePoster" onError={handleNoPoster} />;
+    return props.src !== 'N/A' ? (
+        <img src={props.src} className="movie-poster" alt={props.src} onError={handleNoPoster} />
+    ) : (
+        <div className="movie-poster p-5">
+            <Default />
+        </div>
+    );
 };
 
 export default Poster;
