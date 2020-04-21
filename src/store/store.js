@@ -18,12 +18,6 @@ export class MovieStore {
     @action clearFavorites() {
         this.favorites = [];
     }
-
-    @action resetTerms() {
-        this.query = '';
-        this.year = '';
-        this.type = '';
-    }
 }
 
 const store = new MovieStore();
