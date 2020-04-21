@@ -1,5 +1,6 @@
 import { useEffect, Fragment } from 'react';
 import { inject, observer } from 'mobx-react';
+import 'mobx-react-lite/batchingForReactDom';
 import Card from '../components/movie/Card';
 import Navbar from '../components/Navbar';
 import SearchInput from '../components/SearchInput';
@@ -22,7 +23,7 @@ const App = ({ store }) => {
                               fetch('http://omdbapi.com/?apikey=fd427fdb&i=' + item.imdbID)
                                   .then((res) => res.json())
                                   .then((data) => {
-                                      if (store.results !== undefined && store.results.length) {
+                                      if (store.results !== undefined && store.results) {
                                           if (data.imdbRating !== 'N/A' && store.results[index]) {
                                               store.results[index].imdbRating = data.imdbRating;
                                           }
@@ -73,7 +74,7 @@ const App = ({ store }) => {
                             return <Card key={index} id={item.imdbID} poster={item.Poster} title={item.Title} year={item.Year} rating={item.imdbRating} />;
                         })
                     ) : (
-                        <div className="display-3">Type something to seach movies</div>
+                        <div className="display-4 p-1 info">Type something to seach movies...</div>
                     )}
                 </div>
             </div>
