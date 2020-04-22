@@ -9,8 +9,10 @@ import YearInput from '../components/YearInput';
 
 const App = ({ store }) => {
     useEffect(() => {
-        store.setResults([]);
-    }, [store.query.length < 2]);
+        store.query = '';
+        store.year = '';
+        store.type = '';
+    }, []);
 
     useEffect(() => {
         fetch('http://omdbapi.com/?apikey=fd427fdb&s=' + store.query + '&y=' + store.year + '&type=' + store.type).then((res) =>
@@ -54,27 +56,26 @@ const App = ({ store }) => {
 
     return (
         <Fragment>
-            <Navbar />
             <div className="container">
                 <div className="row mb-5 mt-3">
-                    <div className="col-md-7">
+                    <div className="col">
                         <SearchInput onChange={handleSearch} />
                     </div>
-                    <div className="col-md-3">
+                    <div className="col">
                         <YearInput onChange={handleYearChange} />
                     </div>
-                    <div className="col-md-2">
+                    <div className="col">
                         <TypeSelect onChange={handleTypeChange} />
                     </div>
                 </div>
 
-                <div className="d-flex justify-content-center flex-row flex-wrap">
+                <div className="d-flex justify-content-md-center flex-row flex-wrap ml-auto mr-auto">
                     {store.results !== undefined ? (
                         store.results.map((item, index) => {
                             return <Card key={index} id={item.imdbID} poster={item.Poster} title={item.Title} year={item.Year} rating={item.imdbRating} />;
                         })
                     ) : (
-                        <div className="display-4 p-1 info">Type something to search movies...</div>
+                        <div className="display-4 p-1 info w-100">Type something to search movies...</div>
                     )}
                 </div>
             </div>
