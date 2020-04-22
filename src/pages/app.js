@@ -74,7 +74,7 @@ const App = ({ store }) => {
                             return <Card key={index} id={item.imdbID} poster={item.Poster} title={item.Title} year={item.Year} rating={item.imdbRating} />;
                         })
                     ) : (
-                        <div className="display-4 p-1 info">Type something to seach movies...</div>
+                        <div className="display-4 p-1 info">Type something to search movies...</div>
                     )}
                 </div>
             </div>
