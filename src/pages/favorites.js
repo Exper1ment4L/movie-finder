@@ -10,7 +10,6 @@ const favorites = ({ store }) => {
 
     return (
         <Fragment>
-            <Navbar />
             <div className="container">
                 <div className="row d-flex justify-content-center flex-row mt-3 ">
                     <Favorites favArr={store.favorites} />
