@@ -2,22 +2,22 @@ import { useEffect, Fragment } from 'react';
 import { inject, observer } from 'mobx-react';
 import 'mobx-react-lite/batchingForReactDom';
 import Card from '../components/movie/Card';
-import Navbar from '../components/Navbar';
 import SearchInput from '../components/SearchInput';
 import TypeSelect from '../components/TypeSelect';
 import YearInput from '../components/YearInput';
 
 const App = ({ store }) => {
     useEffect(() => {
-        store.query = '';
-        store.year = '';
-        store.type = '';
+        return () => {
+            store.query = '';
+            store.year = '';
+            store.type = '';
+        };
     }, []);
 
     useEffect(() => {
-        fetch('http://omdbapi.com/?apikey=fd427fdb&s=' + store.query + '&y=' + store.year + '&type=' + store.type).then((res) =>
-            res
-                .json()
+        fetch('http://omdbapi.com/?apikey=fd427fdb&s=' + store.query + '&y=' + store.year + '&type=' + store.type).then((res) => {
+            res.json()
                 .then((data) => {
                     store.setResults(data.Search);
                     store.results !== undefined
@@ -25,7 +25,7 @@ const App = ({ store }) => {
                               fetch('http://omdbapi.com/?apikey=fd427fdb&i=' + item.imdbID)
                                   .then((res) => res.json())
                                   .then((data) => {
-                                      if (store.results !== undefined && store.results) {
+                                      if (store.results && store.results.length > 0) {
                                           if (data.imdbRating !== 'N/A' && store.results[index]) {
                                               store.results[index].imdbRating = data.imdbRating;
                                           }
@@ -38,16 +38,25 @@ const App = ({ store }) => {
                           })
                         : null;
                 })
-                .catch((err) => console.log(err))
-        );
+                .catch((err) => {
+                    console.error('Error: ' + err);
+                });
+        });
     }, [store.query, store.year, store.type]);
 
     const handleSearch = (e) => {
-        store.query = e.target.value;
+        if (e.target.value.length > 2) {
+            store.query = e.target.value;
+        }
+        if (e.target.value.length < 3) {
+            store.setResults([]);
+        }
     };
 
     const handleYearChange = (e) => {
-        store.year = e.target.value;
+        if (e.target.value.length > 3) {
+            store.year = e.target.value;
+        }
     };
 
     const handleTypeChange = (e) => {
@@ -69,8 +78,8 @@ const App = ({ store }) => {
                     </div>
                 </div>
 
-                <div className="d-flex justify-content-md-center flex-row flex-wrap ml-auto mr-auto">
-                    {store.results !== undefined ? (
+                <div className="d-flex justify-content-center flex-row flex-wrap">
+                    {store.results && store.results.length > 0 ? (
                         store.results.map((item, index) => {
                             return <Card key={index} id={item.imdbID} poster={item.Poster} title={item.Title} year={item.Year} rating={item.imdbRating} />;
                         })
