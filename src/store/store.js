@@ -14,10 +14,6 @@ export class MovieStore {
     @action setFavorites(favorites) {
         this.favorites = favorites;
     }
-
-    @action clearFavorites() {
-        this.favorites = [];
-    }
 }
 
 const store = new MovieStore();
