@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
-import Navbar from '../components/Navbar';
 import Favorites from '../components/Favorites';
 
 const favorites = ({ store }) => {
