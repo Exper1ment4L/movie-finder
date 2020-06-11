@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faHeart, faStar} from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 
 const Navbar = () => {
@@ -15,6 +15,9 @@ const Navbar = () => {
                     <FontAwesomeIcon icon={faHeart} color="red" /> Favorites
                 </a>
             </Link>
+                <a href='https://github.com/Exper1ment4L/movie-finder' className="navbar-brand" target='_blank'>
+                    <FontAwesomeIcon icon={faStar} color="orange" /> Github
+                </a>
         </nav>
     );
 };
